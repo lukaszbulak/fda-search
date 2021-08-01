@@ -1,13 +1,14 @@
-package pl.square.fdasearch.application;
+package pl.square.fdasearch.search.application;
 
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import pl.square.fdasearch.domain.DrugSearchResponse;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import pl.square.fdasearch.search.domain.DrugSearchResponse;
 
 @Service
 @AllArgsConstructor

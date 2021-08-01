@@ -1,10 +1,10 @@
-package pl.square.fdasearch.application
+package pl.square.fdasearch.search.application
 
 
 import org.springframework.http.ResponseEntity
 import org.springframework.web.client.RestTemplate
-import pl.square.fdasearch.domain.DrugSearchResponse
-import pl.square.fdasearch.domain.DrugSearchResult
+import pl.square.fdasearch.search.domain.DrugSearchResponse
+import pl.square.fdasearch.search.domain.DrugSearchResult
 import spock.lang.Specification
 
 class SearchServiceSpec extends Specification {

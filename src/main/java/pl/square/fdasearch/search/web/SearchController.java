@@ -1,4 +1,4 @@
-package pl.square.fdasearch.web;
+package pl.square.fdasearch.search.web;
 
 
 import io.swagger.annotations.Api;
@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import pl.square.fdasearch.application.SearchService;
+import pl.square.fdasearch.search.application.SearchService;
 
 import static org.apache.logging.log4j.util.Strings.isEmpty;
 import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;

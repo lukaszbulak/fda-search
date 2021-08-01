@@ -1,4 +1,4 @@
-package pl.square.fdasearch.web;
+package pl.square.fdasearch.search.web;
 
 
 import org.junit.jupiter.api.BeforeEach;
@@ -12,7 +12,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
-import pl.square.fdasearch.application.SearchService;
+import pl.square.fdasearch.search.application.SearchService;
 
 import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;

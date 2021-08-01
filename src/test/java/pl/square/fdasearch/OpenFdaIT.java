@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
-import pl.square.fdasearch.domain.DrugSearchResponse;
+import pl.square.fdasearch.search.domain.DrugSearchResponse;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
