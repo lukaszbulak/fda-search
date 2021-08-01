@@ -26,7 +26,6 @@ public class OpenFdaIT {
         String brandName = "Tecentriq";
         String searchTerm = "openfda.brand_name:\""+brandName+"\""; // &limit=1
 
-        //ResponseEntity<String> response = restTemplate.getForEntity(searchUrl + searchTerm, String.class);
         ResponseEntity<DrugSearchResponse> response
                 = restTemplate.getForEntity(searchUrl + searchTerm, DrugSearchResponse.class);
 
