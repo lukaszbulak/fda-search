@@ -55,11 +55,26 @@ public class SearchService {
     }
 
     private DrugSearchResponse search(String searchTerm, Map<String, String> vars) {
-        ResponseEntity<DrugSearchResponse> response
-                = restTemplate.getForEntity(searchUrl + searchTerm, DrugSearchResponse.class, vars);
-        // TODO check for valid response
 
-        return response.getBody();
+        ResponseEntity<DrugSearchResponse> response;
+        try {
+            response = restTemplate.getForEntity(searchUrl + searchTerm, DrugSearchResponse.class, vars);
+        } catch (Throwable t) {
+            throw new IllegalStateException("Error wile retrieving drug information");
+        }
+        if (! response.hasBody() ) {
+            throw new IllegalStateException("No data returned");
+        }
+        DrugSearchResponse body = response.getBody();
+        if (body.getError() != null ) {
+            if ("NOT_FOUND".equals(body.getError().getCode())) {
+                throw new IllegalStateException("Not found returned");
+            } else {
+                throw new IllegalStateException("Other error returned: "+body.getError());
+            }
+        }
+
+        return body;
     }
 
 }

@@ -14,10 +14,12 @@ import org.springframework.web.context.WebApplicationContext;
 import pl.square.fdasearch.search.application.SearchService;
 import pl.square.fdasearch.search.domain.DrugSearchResponse;
 import pl.square.fdasearch.search.domain.DrugSearchResult;
+import pl.square.fdasearch.search.domain.ErrorResult;
 
 import java.util.List;
 
 import static org.hamcrest.Matchers.containsString;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -46,33 +48,36 @@ class SearchControllerTest {
         mvc.perform(get("/search"))
                 //.andDo(print())
                 .andExpect(status().isBadRequest())
-                .andExpect(content().string("both arguments cannot be empty"));
+                //.andExpect(content().string("both arguments cannot be empty"))
+                ;
     }
 
     @Test
     void searchForBrand() throws Exception {
-
+        // given
         DrugSearchResponse response = mockResponse1234();
-
-        Mockito.when(service.searchForBrand(Mockito.eq("apap"))).thenReturn(response);
+        Mockito.when(service.searchForBrand(eq("apap"))).thenReturn(response);
+        // when
         mvc.perform(get("/search")
                 .param("brand", "apap")
                 )
                 .andDo(print())
+        // then
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("1234")));
     }
 
     @Test
     void searchForManufacturer() throws Exception {
-
+        // given
         DrugSearchResponse response = mockResponse1234();
+        Mockito.when(service.searchForManufacturer(eq("gsk"))).thenReturn(response);
 
-        Mockito.when(service.searchForManufacturer(Mockito.eq("gsk"))).thenReturn(response);
         mvc.perform(get("/search")
                 .param("manufacturer", "gsk")
         )
                 .andDo(print())
+        // then
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("1234")));
     }
@@ -80,35 +85,34 @@ class SearchControllerTest {
 
     @Test
     void searchForBoth() throws Exception {
-
+        // given
         DrugSearchResponse response = mockResponse1234();
-
-        Mockito.when(service.searchForBrand(Mockito.eq("apap"))).thenReturn(response);
-        Mockito.when(service.searchForManufacturer(Mockito.eq("gsk"))).thenReturn(response);
+        Mockito.when(service.searchForBoth(eq("gsk"), eq("apap"))).thenReturn(response);
+        // when
         mvc.perform(get("/search")
                 .param("brand", "apap")
                 .param("manufacturer", "gsk")
         )
                 .andDo(print())
+        // then
                 .andExpect(status().isOk())
                 .andExpect(content().string(containsString("1234")));
     }
 
-    @Disabled // FIXME
     @Test
     void searchWillReturnNoData() throws Exception {
 
-        DrugSearchResponse response = mockResponse1234();
-
-        Mockito.when(service.searchForBrand(Mockito.eq("apap"))).thenReturn(response);
-        Mockito.when(service.searchForManufacturer(Mockito.eq("gsk"))).thenReturn(response);
+        DrugSearchResponse emptyResponse = new DrugSearchResponse();
+        ErrorResult error = new ErrorResult();
+        error.setCode("NOT_FOUND");
+        emptyResponse.setError(error);
+        Mockito.when(service.searchForBrand(eq("notexisting"))).thenReturn(emptyResponse);
         mvc.perform(get("/search")
-                .param("brand", "apap")
-                .param("manufacturer", "gsk")
+                .param("brand", "notexisting")
         )
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(content().string(containsString("1234")));
+                .andExpect(content().string(containsString("NOT_FOUND")));
     }
 
 

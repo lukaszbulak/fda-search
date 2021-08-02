@@ -14,4 +14,7 @@ public class DrugSearchResponse {
 //    Map<String, String> meta;
     @JsonProperty
     List<DrugSearchResult> results;
+
+    @JsonProperty
+    ErrorResult error;
 }

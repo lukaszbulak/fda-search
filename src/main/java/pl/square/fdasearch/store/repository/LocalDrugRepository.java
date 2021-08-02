@@ -7,6 +7,4 @@ import pl.square.fdasearch.store.domain.Drug;
 @Repository
 public interface LocalDrugRepository extends CrudRepository<Drug, String> {
 
-    //Optional<Drug> findByName(String name);
-
 }

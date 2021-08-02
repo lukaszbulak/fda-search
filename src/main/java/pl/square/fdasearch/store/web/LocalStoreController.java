@@ -49,9 +49,9 @@ public class LocalStoreController {
     public ResponseEntity<String> storeDrug(@PathVariable String application_number) {
 
         // find
-        pl.square.fdasearch.search.domain.DrugSearchResponse found = searchService.searchForApplicationNumber(application_number);
+        var found = searchService.searchForApplicationNumber(application_number);
         // TODO check is found
-        pl.square.fdasearch.search.domain.DrugSearchResult result = found.getResults().get(0);
+        var result = found.getResults().get(0);
         // check result
 
         String modeInfo = storeService.storeLocally(result, application_number);

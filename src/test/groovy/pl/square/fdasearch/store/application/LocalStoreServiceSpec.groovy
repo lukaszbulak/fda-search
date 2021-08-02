@@ -1,8 +1,5 @@
 package pl.square.fdasearch.store.application
 
-import org.springframework.http.ResponseEntity
-import pl.square.fdasearch.search.application.SearchService
-import pl.square.fdasearch.search.domain.DrugSearchResponse
 import pl.square.fdasearch.search.domain.DrugSearchResult
 import pl.square.fdasearch.search.domain.OpenFda
 import pl.square.fdasearch.search.domain.Product
@@ -30,6 +27,5 @@ class LocalStoreServiceSpec extends Specification {
         1 * repository.findById("A1234") >> Optional.empty()
         1 * repository.save({
             ((Drug)it).application_number == "A1234" })
-
     }
 }

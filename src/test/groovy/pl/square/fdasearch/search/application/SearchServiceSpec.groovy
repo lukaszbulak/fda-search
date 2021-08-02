@@ -15,6 +15,7 @@ class SearchServiceSpec extends Specification {
 
         given:
         ResponseEntity<DrugSearchResponse> resp = Mock(ResponseEntity<DrugSearchResponse>) {
+            hasBody() >> true
             getBody() >> new DrugSearchResponse(results: [new DrugSearchResult(application_number: "1234")] as List)
         }
 

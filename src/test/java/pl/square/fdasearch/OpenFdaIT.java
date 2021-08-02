@@ -41,7 +41,19 @@ public class OpenFdaIT {
         mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
         DrugSearchResponse resp = mapper.readValue(response, DrugSearchResponse.class);
-        System.out.println(resp);
+        System.out.println(resp.getResults());
+    }
+
+
+    @Test
+    public void parseResponseError() throws URISyntaxException, IOException {
+
+        String response = Files.readString(Path.of(getClass().getResource("/response_error.json").toURI()));
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+
+        DrugSearchResponse resp = mapper.readValue(response, DrugSearchResponse.class);
+        System.out.println(resp.getError());
     }
 
 }
