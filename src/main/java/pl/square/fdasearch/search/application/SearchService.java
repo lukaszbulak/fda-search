@@ -38,10 +38,11 @@ public class SearchService {
 
         String searchTerm = "openfda.application_number:\"{number}\"";
         Map<String, String> vars = new HashMap<>();
-        vars.put("application_number", application_number);
+        vars.put("number", application_number);
         return search(searchTerm, vars);
     }
 
+//    @Cached
     public DrugSearchResponse searchForBoth(String manufacturer, String brand) {
         String searchTerm = "openfda.manufacturer_name:\"{manufacturer}\"";
         searchTerm += "+AND+";

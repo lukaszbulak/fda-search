@@ -1,6 +1,5 @@
 package pl.square.fdasearch.search.application
 
-
 import org.springframework.http.ResponseEntity
 import org.springframework.web.client.RestTemplate
 import pl.square.fdasearch.search.domain.DrugSearchResponse

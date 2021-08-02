@@ -24,7 +24,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
-//@EnableAutoConfiguration(exclude= DataSourceAutoConfiguration.class)
 class SearchControllerTest {
 
     @Autowired
@@ -53,7 +52,7 @@ class SearchControllerTest {
     @Test
     void searchForBrand() throws Exception {
 
-        DrugSearchResponse response = mockResponse();
+        DrugSearchResponse response = mockResponse1234();
 
         Mockito.when(service.searchForBrand(Mockito.eq("apap"))).thenReturn(response);
         mvc.perform(get("/search")
@@ -67,7 +66,7 @@ class SearchControllerTest {
     @Test
     void searchForManufacturer() throws Exception {
 
-        DrugSearchResponse response = mockResponse();
+        DrugSearchResponse response = mockResponse1234();
 
         Mockito.when(service.searchForManufacturer(Mockito.eq("gsk"))).thenReturn(response);
         mvc.perform(get("/search")
@@ -82,7 +81,7 @@ class SearchControllerTest {
     @Test
     void searchForBoth() throws Exception {
 
-        DrugSearchResponse response = mockResponse();
+        DrugSearchResponse response = mockResponse1234();
 
         Mockito.when(service.searchForBrand(Mockito.eq("apap"))).thenReturn(response);
         Mockito.when(service.searchForManufacturer(Mockito.eq("gsk"))).thenReturn(response);
@@ -99,7 +98,7 @@ class SearchControllerTest {
     @Test
     void searchWillReturnNoData() throws Exception {
 
-        DrugSearchResponse response = mockResponse();
+        DrugSearchResponse response = mockResponse1234();
 
         Mockito.when(service.searchForBrand(Mockito.eq("apap"))).thenReturn(response);
         Mockito.when(service.searchForManufacturer(Mockito.eq("gsk"))).thenReturn(response);
@@ -113,7 +112,7 @@ class SearchControllerTest {
     }
 
 
-    private DrugSearchResponse mockResponse() {
+    private DrugSearchResponse mockResponse1234() {
         DrugSearchResponse response = new DrugSearchResponse();
         DrugSearchResult result1 = new DrugSearchResult();
         result1.setApplication_number("1234");
