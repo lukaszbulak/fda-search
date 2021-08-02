@@ -16,25 +16,41 @@ public class SearchService {
 
     final String searchUrl = "https://api.fda.gov/drug/drugsfda.json?search=";
 
-//    final RestTemplateFactory factory;
     final RestTemplate restTemplate;
 
-    public String searchForBrand(String brandName) {
+    public DrugSearchResponse searchForBrand(String brandName) {
 
-        String searchTerm = "openfda.brand_name:\"{brandName}\""; // &limit=1
+        String searchTerm = "openfda.brand_name:\"{brandName}\"";
         Map<String, String> vars = new HashMap<>();
         vars.put("brandName", brandName);
-        return search(searchTerm, vars).toString();
-
+        return search(searchTerm, vars);
     }
 
-    public String searchForManufacturer(String manufacturer) {
+    public DrugSearchResponse searchForManufacturer(String manufacturer) {
 
-        String searchTerm = "openfda.manufacturer_name:\"{manufacturer}\""; // &limit=1
+        String searchTerm = "openfda.manufacturer_name:\"{manufacturer}\"";
+        Map<String, String> vars = new HashMap<>();
+        vars.put("manufacturer", manufacturer);
+        return search(searchTerm, vars);
+    }
+
+    public DrugSearchResponse searchForApplicationNumber(String application_number) {
+
+        String searchTerm = "openfda.application_number:\"{number}\"";
+        Map<String, String> vars = new HashMap<>();
+        vars.put("application_number", application_number);
+        return search(searchTerm, vars);
+    }
+
+    public DrugSearchResponse searchForBoth(String manufacturer, String brand) {
+        String searchTerm = "openfda.manufacturer_name:\"{manufacturer}\"";
+        searchTerm += "+AND+";
+        searchTerm += "openfda.brand_name:\"{brandName}\"";
 
         Map<String, String> vars = new HashMap<>();
         vars.put("manufacturer", manufacturer);
-        return search(searchTerm, vars).toString();
+        vars.put("brandName", brand);
+        return search(searchTerm, vars);
     }
 
     private DrugSearchResponse search(String searchTerm, Map<String, String> vars) {
@@ -45,14 +61,4 @@ public class SearchService {
         return response.getBody();
     }
 
-    public DrugSearchResponse searchForApplicationNumber(String application_number) {
-        // search=openfda.application_number:"FOO+BAR"
-
-        String searchTerm = "openfda.application_number:\"{number}\""; // &limit=1
-
-        Map<String, String> vars = new HashMap<>();
-        vars.put("application_number", application_number);
-        return search(searchTerm, vars);
-
-    }
 }

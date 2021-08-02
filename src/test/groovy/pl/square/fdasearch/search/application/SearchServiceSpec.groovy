@@ -10,7 +10,6 @@ import spock.lang.Specification
 class SearchServiceSpec extends Specification {
 
     RestTemplate template = Mock(RestTemplate);
-
     SearchService service = new SearchService(template);
 
     def "SearchForBrand"() {
@@ -21,12 +20,17 @@ class SearchServiceSpec extends Specification {
         }
 
         when:
-        def result = service.searchForBrand("apap");
+        DrugSearchResponse result = service.searchForBrand("apap");
 
         then:
-        !result.isBlank()
+        result
          1 * template.getForEntity(_ as String, DrugSearchResponse, _) >> resp
-        println result
+        result.results[0].application_number == "1234"
+    }
 
+    def "SearchForManufacturer"() {
+    }
+
+    def "SearchForApplicationNumber"() {
     }
 }

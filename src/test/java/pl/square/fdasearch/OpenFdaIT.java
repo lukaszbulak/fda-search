@@ -23,7 +23,7 @@ public class OpenFdaIT {
 
         RestTemplate restTemplate = new RestTemplate();
         String searchUrl = "https://api.fda.gov/drug/drugsfda.json?search=";
-        String brandName = "Tecentriq";
+        String brandName = "apap";
         String searchTerm = "openfda.brand_name:\""+brandName+"\""; // &limit=1
 
         ResponseEntity<DrugSearchResponse> response
@@ -42,7 +42,6 @@ public class OpenFdaIT {
 
         DrugSearchResponse resp = mapper.readValue(response, DrugSearchResponse.class);
         System.out.println(resp);
-
     }
 
 }

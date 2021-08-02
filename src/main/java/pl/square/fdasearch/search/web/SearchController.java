@@ -25,12 +25,13 @@ public class SearchController {
             if (isEmpty(brand)) {
                 return ResponseEntity.badRequest().body("both arguments cannot be empty");
             }
-            return ResponseEntity.ok(service.searchForBrand(brand));
+            return ResponseEntity.ok(service.searchForBrand(brand).toString());
         }
         if (isEmpty(brand)) {
-            return ResponseEntity.ok("for man"); //searchContoller.searchForManufacturer(manufacturer);
+            return ResponseEntity.ok(service.searchForManufacturer(manufacturer).toString()); //searchContoller.searchForManufacturer(manufacturer);
         }
-        return ResponseEntity.ok("for man & brand"); //searchContoller.searchForManufacturer(manufacturer);
+
+        return ResponseEntity.ok(service.searchForBoth(manufacturer, brand).toString());
     }
 
 

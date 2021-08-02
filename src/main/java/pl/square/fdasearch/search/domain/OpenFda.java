@@ -10,7 +10,8 @@ import java.util.List;
 @Data
 public class OpenFda {
     List<String> application_number;
-    String brand_name;
+//    @JsonProperty
+//    List<String>  brand_name;
     @JsonProperty
     List<String> manufacturer_name;
     @JsonProperty
