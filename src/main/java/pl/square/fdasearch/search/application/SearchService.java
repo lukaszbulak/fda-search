@@ -24,7 +24,7 @@ public class SearchService {
         String searchTerm = "openfda.brand_name:\"{brandName}\""; // &limit=1
         Map<String, String> vars = new HashMap<>();
         vars.put("brandName", brandName);
-        return search(searchTerm, vars);
+        return search(searchTerm, vars).toString();
 
     }
 
@@ -34,15 +34,25 @@ public class SearchService {
 
         Map<String, String> vars = new HashMap<>();
         vars.put("manufacturer", manufacturer);
-        return search(searchTerm, vars);
+        return search(searchTerm, vars).toString();
     }
 
-    private String search(String searchTerm, Map<String, String> vars) {
+    private DrugSearchResponse search(String searchTerm, Map<String, String> vars) {
         ResponseEntity<DrugSearchResponse> response
                 = restTemplate.getForEntity(searchUrl + searchTerm, DrugSearchResponse.class, vars);
         // TODO check for valid response
 
-        return response.getBody().toString();
+        return response.getBody();
     }
 
+    public DrugSearchResponse searchForApplicationNumber(String application_number) {
+        // search=openfda.application_number:"FOO+BAR"
+
+        String searchTerm = "openfda.application_number:\"{number}\""; // &limit=1
+
+        Map<String, String> vars = new HashMap<>();
+        vars.put("application_number", application_number);
+        return search(searchTerm, vars);
+
+    }
 }
